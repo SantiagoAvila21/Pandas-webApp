@@ -32,7 +32,7 @@ def get_data():
     response = { 'message': 'Success', 'info': parser(data)}
     return jsonify(response)
 
-
+# Ruta de Filtrado
 @app.route('/api/data/filter', methods=['GET'])
 def get_filter():
     municipio = request.args.get('municipio', default = '', type=str)

@@ -93,6 +93,7 @@ function App() {
   // Al inicio del render, realizar la petición de todas la información al servidor
   useEffect(() => {
     getAllData();
+    // eslint-disable-next-line 
   },[]);
 
 

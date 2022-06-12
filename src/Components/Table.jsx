@@ -10,7 +10,7 @@ const Table = () => {
 
     return (
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-300 uppercase bg-gray-700 shadow-sm">
+            <thead className="text-xs text-gray-300 uppercase bg-slate-500 shadow-sm">
                 <Titles titles={context.data.data[0]} />
             </thead>
             <tbody>
