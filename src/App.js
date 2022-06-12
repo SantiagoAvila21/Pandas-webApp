@@ -37,6 +37,24 @@ function App() {
     setCurrentState(currentRef.current.value);
   }
 
+  const handleEdadChange = () => {
+    if(edad.current.value.includes("Escoge")){
+      delete args['minedad'];
+      delete args['maxedad'];
+      if(Object.entries(args).length === 0){
+        getAllData();
+        setEdadS(edad.current.value);
+        return ;
+      }
+    } else {
+      const [minedad,maxedad] = edad.current.value.split(",");
+      args['minedad'] = minedad;
+      args['maxedad'] = maxedad;
+    }
+    filter();
+    setEdadS(edad.current.value);
+  }
+
   // Funcion que gestiona la peticion al servidor con los filtros y argumentos correspondientes en la variable global 'args'
   // y los envia al estado global de la aplicacion 
   const filter = () => {
@@ -86,8 +104,23 @@ function App() {
           <div className="m-5 mb-0 flex flex-row">
             <Select fulldata={fulldata} value={muniS} ref={municipio} handleChange={() => handleSelectChange(municipio, setMuniS, 'municipio')} title="Municipio" col="ciudad_municipio_nom" />
             <Select fulldata={fulldata} value={sexoS} ref={sexo} handleChange={() => handleSelectChange(sexo,setSexoS,"sexo")} title="Sexo" col="sexo" />
-            <Select fulldata={fulldata} value={edadS} ref={edad} handleChange={() => handleSelectChange(edad,setEdadS,"edad")} title="Edad" col="edad" />
             <Select fulldata={fulldata} value={estadoS} ref={estado} handleChange={() => handleSelectChange(estado,setEstadoS,"estado")} title="Estado" col="estado" />
+            <div className="flex flex-col w-full text-white mx-6">
+              <h1 className="text-medium">Edad</h1>
+              <select value={edadS} ref={edad} onChange={handleEdadChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value={`Escoge edad`}>Escoge Edad</option>
+                <option value="1,10"> 1 a 10 años de edad</option>
+                <option value="11,20"> 11 a 20 años de edad</option>
+                <option value="21,30"> 21 a 30 años de edad</option>
+                <option value="31,40"> 31 a 40 años de edad</option>
+                <option value="41,50"> 41 a 50 años de edad</option>
+                <option value="51,60"> 51 a 60 años de edad</option>
+                <option value="61,70"> 61 a 70 años de edad</option>
+                <option value="71,80"> 71 a 80 años de edad</option>
+                <option value="81,90"> 81 a 90 años de edad</option>
+                <option value="91,100"> 91 a 100 años de edad</option>
+              </select>
+            </div>
           </div>
           <div className="relative overflow-x-auto shadow-md sm:rounded-lg w-4/5 my-9">
             {context.data.data.length === 0 && <Error />}
