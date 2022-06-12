@@ -8,6 +8,7 @@ import Error from './Components/Error';
 
 let fulldata = [];
 let args = {};
+const edades = [[1,10], [11,20], [21,30], [31,40], [41,50], [51,60], [61,70], [71,80], [81,90], [91,100]];
 
 function App() {
   // Definicion de los estados de los filtros asi como las Referencias correspondientes
@@ -109,16 +110,7 @@ function App() {
               <h1 className="text-medium">Edad</h1>
               <select value={edadS} ref={edad} onChange={handleEdadChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value={`Escoge edad`}>Escoge Edad</option>
-                <option value="1,10"> 1 a 10 años de edad</option>
-                <option value="11,20"> 11 a 20 años de edad</option>
-                <option value="21,30"> 21 a 30 años de edad</option>
-                <option value="31,40"> 31 a 40 años de edad</option>
-                <option value="41,50"> 41 a 50 años de edad</option>
-                <option value="51,60"> 51 a 60 años de edad</option>
-                <option value="61,70"> 61 a 70 años de edad</option>
-                <option value="71,80"> 71 a 80 años de edad</option>
-                <option value="81,90"> 81 a 90 años de edad</option>
-                <option value="91,100"> 91 a 100 años de edad</option>
+                {edades.map(edad => <option value={`${edad[0]},${edad[1]}`}> {edad[0]} a {edad[1]} años de edad</option>)}
               </select>
             </div>
           </div>

@@ -42,8 +42,6 @@ def get_filter():
     maxedad = request.args.get('maxedad', default = 0, type=int)
     # Parsear los argumentos del request a un diccionario
     argums = request.args.to_dict()
-    print(argums)
-    print(minedad, maxedad)
     global data
     data['edad'] = data['edad'].astype(int)
     # Analizar cada condición impuesta por los argumentos
