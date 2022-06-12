@@ -36,13 +36,20 @@ def get_data():
 @app.route('/api/data/filter', methods=['GET'])
 def get_filter():
     municipio = request.args.get('municipio', default = '', type=str)
+    sexo = request.args.get('sexo', default = '', type=str)
+    estado = request.args.get('estado', default = '', type=str)
+
+    # Parsear los argumentos del request a un diccionario
     argums = request.args.to_dict()
-    print(request.args.to_dict())
-    print(len(municipio))
     global data
-    print('municipio' in argums)
+    # Analizar cada condición impuesta por los argumentos
+    # Donde si algun argumento no existe se pasara como True
+    # Ya que asi mismo no afectará cuando se haga un & por toda
+    municipioCondition = data['ciudad_municipio_nom'] == municipio if ('municipio' in argums) else True
+    sexoCondition = data['sexo'] == sexo if ('sexo' in argums) else True
+    estadoCondition = data['estado'] == estado if ('estado' in argums) else True
 
-
-
-    response = {'message': 'Success', 'info': parser(data[data['ciudad_municipio_nom'] == municipio])}
+    # full será un arreglo de todas las Keys en las cuales se cumplen todas las condiciones
+    full = municipioCondition & sexoCondition & estadoCondition
+    response = {'message': 'Success', 'info': parser(data[full])}
     return jsonify(response)
